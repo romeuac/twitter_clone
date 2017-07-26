@@ -1,5 +1,8 @@
 <?php
 
+    // Por convencao a deve-se chamar a funcao sessios start logo no inicio do php
+    session_start();
+
     require_once("db.class.php");
 
     $usuario = $_POST["usuario"];
@@ -7,7 +10,7 @@
 
     // echo "<br> $usuario e $senha";
 
-    $sql = "select * from usuarios WHERE usuario = '$usuario' and senha = '$senha'";
+    $sql = "select usuario, email from usuarios WHERE usuario = '$usuario' and senha = '$senha'";
 
     $objDb = new db();
     $link = $objDb->conecta_mysql();
@@ -25,8 +28,13 @@
         $dados_usuario = mysqli_fetch_array ($resultado_id);
         // var_dump($dados_usuario);
 
+        // Caso o usuario e senha sejam validos
         if (isset($dados_usuario['usuario'])){
-            echo "<br>User exists<br>";
+            // Salvamos na super global session o usuario - Tais variaveis serao acessiveis das outras paginas tambem devido ao uso da Sessio
+            $_SESSION['usuario'] = $dados_usuario['usuario'];
+            $_SESSION['email'] = $dados_usuario['email'];
+
+            header('Location: home.php');
         }else { 
             // Passa-se para a pagina de index com erro = 1 , via GET
             header('Location: index.php?erro=1');

@@ -4,6 +4,7 @@
 		<meta charset="UTF-8"> 
 
 		<title>Twitter clone</title>
+		<link rel="icon" href="imagens/favicon.png">
 		
 		<!-- jquery - link cdn -->
 		<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>

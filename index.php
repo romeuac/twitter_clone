@@ -14,6 +14,7 @@
 		<meta charset="UTF-8">
  
 		<title>Twitter clone</title>
+		<link rel="icon" href="imagens/favicon.png">
 
 		<!-- jquery - link cdn -->
 		<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
@@ -35,7 +36,7 @@
 					else
 						$("#campo_usuario").css("border-color", "#CCC");
 				
-				
+
 					if($("#campo_senha").val() == ""){
 						$("#campo_senha").css("border-color", "#A94442");
 						campo_vazio = true;
