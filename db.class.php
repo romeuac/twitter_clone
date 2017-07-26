@@ -26,7 +26,7 @@
 
             // Verificar se houve erro com DB
             if (mysqli_connect_errno()){
-                echo "Erro ao tentar se conectar com o MySQL".mysqli_connect_error();
+                echo "Error trying to connect with MySQL".mysqli_connect_error();
             }
 
             return $con;

@@ -30,7 +30,7 @@
 	        
 	        <div id="navbar" class="navbar-collapse collapse">
 	          <ul class="nav navbar-nav navbar-right">
-	            <li><a href="index.php">Voltar para Home</a></li>
+	            <li><a href="index.php">Back to Home</a></li>
 	          </ul>
 	        </div><!--/.nav-collapse -->
 	      </div>
@@ -43,13 +43,13 @@
 
 	    	<div class="col-md-4"></div>
 	    	<div class="col-md-4">
-	    		<h3>Inscreva-se já.</h3>
+	    		<h3>Sign up now!</h3>
 	    		<br />
 
 					<!--Dados do form serao enviados ao registra_..._php por post-->
 					<form method="post" action="registra_usuario.php" id="formCadastrarse">
 						<div class="form-group">
-							<input type="text" class="form-control" id="usuario" name="usuario" placeholder="Usuário" required="requiored">
+							<input type="text" class="form-control" id="usuario" name="usuario" placeholder="User" required="requiored">
 						</div>
 
 						<div class="form-group">
@@ -57,10 +57,10 @@
 						</div>
 						
 						<div class="form-group">
-							<input type="password" class="form-control" id="senha" name="senha" placeholder="Senha" required="requiored">
+							<input type="password" class="form-control" id="senha" name="senha" placeholder="Password" required="requiored">
 						</div>
 						
-						<button type="submit" class="btn btn-primary form-control">Inscreva-se</button>
+						<button type="submit" class="btn btn-primary form-control">Sign up</button>
 					</form>
 			</div>
 			<div class="col-md-4"></div>
