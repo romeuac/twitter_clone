@@ -1,3 +1,12 @@
+<?php
+
+	$erro_usr = isset($_GET["erro_usr"])? $_GET["erro_usr"] : 0;
+	$erro_email = isset($_GET["erro_email"])? $_GET["erro_email"] : 0;
+
+
+
+?>
+
 <!DOCTYPE HTML>
 <html lang="pt-br">
 	<head>
@@ -26,7 +35,7 @@
 	            <span class="icon-bar"></span>
 	            <span class="icon-bar"></span>
 	          </button>
-	          <img src="imagens/icone_twitter.png" />
+	          <a href="home.php"><img src="imagens/icone_twitter.png" /></a>
 	        </div>
 	        
 	        <div id="navbar" class="navbar-collapse collapse">
@@ -51,10 +60,12 @@
 					<form method="post" action="registra_usuario.php" id="formCadastrarse">
 						<div class="form-group">
 							<input type="text" class="form-control" id="usuario" name="usuario" placeholder="User" required="requiored">
+							<?= $erro_usr==1 ? '<font color="#FF0000">User already registred</font>' : ''?>
 						</div>
 
 						<div class="form-group">
 							<input type="email" class="form-control" id="email" name="email" placeholder="Email" required="requiored">
+							<?= $erro_email==1 ? '<font color="#FF0000">Email already registred</font>' : ''?>
 						</div>
 						
 						<div class="form-group">

@@ -68,7 +68,7 @@
 	            <span class="icon-bar"></span>
 	            <span class="icon-bar"></span>
 	          </button>
-	          <img src="imagens/icone_twitter.png" />
+	          <a href="home.php"><img src="imagens/icone_twitter.png" /></a>
 	        </div>
 	        
 	        <div id="navbar" class="navbar-collapse collapse">
