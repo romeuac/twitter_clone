@@ -5,6 +5,42 @@
     if (!$_SESSION["usuario"]){
         header("Location: index.php?erro=2");
     }
+
+    $id_usuario = $_SESSION["id_usuario"];
+
+    require_once('db.class.php');
+
+
+    $objDb = new db();
+    $link = $objDb->conecta_mysql();
+
+    // Constulta qnt de tweets
+    $sql = "SELECT count(*) AS qnt_tweets FROM tweets WHERE id_usuario = $id_usuario";
+
+    $resultado_id = mysqli_query ($link, $sql);
+    $qnt_tweets = 0;
+
+    if ($resultado_id){
+        $registro = mysqli_fetch_array($resultado_id, MYSQLI_ASSOC);
+        $qnt_tweets  = $registro["qnt_tweets"];
+    }
+    else{
+        echo "Query execution error";
+    }
+
+    // Consulta qnt de se followers
+    $sql = "SELECT count(*) AS qnt_seguidores FROM usuarios_seguidores WHERE id_usuario_seguido = $id_usuario";
+
+    $resultado_id = mysqli_query ($link, $sql);
+    $qnt_seguidores = 0;
+
+    if ($resultado_id){
+        $registro = mysqli_fetch_array($resultado_id, MYSQLI_ASSOC);
+        $qnt_seguidores  = $registro["qnt_seguidores"];
+    }
+    else{
+        echo "Query execution error";
+    }
 ?>
 
 
@@ -143,12 +179,12 @@
                         
                         <div class="col-md-6 text-center">
                             <strong>Tweets</strong><br>
-                            <span>1</span>
+                            <span><?= $qnt_tweets ?></span>
                         </div>
 
                         <div class="col-md-6 text-center">
                             <strong>Followers:</strong><br>
-                            <span>1</span>
+                            <span><?= $qnt_seguidores ?></span>
                         </div>
 
                     </div>
@@ -178,11 +214,11 @@
 
 			<div class="col-md-3">
 
-                <div class="panel panel-default text-center">
+                <!--<div class="panel panel-default text-center">
                     <div class="panel-body">
                         
                     </div>
-                </div>
+                </div>-->
             
             </div>
 
