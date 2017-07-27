@@ -25,27 +25,64 @@
         <script type="text/javascript">
             $(document).ready( function() {
                 // Associar o evento de click ao envio do texto ao BD
-                $("#btn_tweet").click( function () {
-                    var tweet = $("#texto_tweet").val();
-
+                $("#btn_procurar_pessoa").click( function () {
+                    var nome_pessoa = $("#nome_pessoa").val();
+  
                     // Para que nao seja enviada ao banco tweets vazios
-                    if (tweet.length > 0 ){
+                    if ( nome_pessoa.length > 0 ){                       
 
                         // Demanda um paramentro JSON
                         $.ajax({
-                            url: "inclui_tweet.php",
+                            url: "get_pessoa.php",
 
-                            method: "post",
+                            method: "POST",
                             
-                            // data: {chave1: valor1, chave2: valor2,...}
-                            //data: {texto_tweet: tweet},
-                            // Boa forma de agilizar processo quando existe um grande formulario e vao ser todos passados para o script php, ou seja la onde
-                            data: $("#form_tweet").serialize(),
+                            data: $("#form_procurar_pessoa").serialize(),
+
+                            //data: {nome_pessoa: nome_pessoa},
 
                             success: function (data){
-                                $("#texto_tweet").val("");
-                                // alert("Tweet incluído com sucesso");
-                                atualizaTweet();
+                                $("#pessoas").html(data);
+
+                                $(".btn_seguir").click(function(){
+                                    // alert("Btn seguir");
+                                    var id_usuario_seguido = $(this).data("id_usuario");
+                                    // alert(id_usuario_seguido);
+
+                                    $("#btn_seguir"+id_usuario_seguido).hide();
+                                    $("#btn_deixar_seguir"+id_usuario_seguido).show();
+
+                                    $.ajax({
+                                        url: "seguir.php",
+                                        method: "POST",
+                                        data: {seguir_id_usuario: id_usuario_seguido},
+                                        success: function (data){
+                                            alert("Registro seguido com sucesso");
+                                            // alert(data);
+                                        }
+                                    });
+
+                                });
+
+                                $(".btn_deixar_seguir").click(function(){
+                                    // alert("Btn seguir");
+                                    var id_usuario_seguido = $(this).data("id_usuario");
+                                    // alert(id_usuario_seguido);
+
+                                    $("#btn_deixar_seguir"+id_usuario_seguido).hide();
+                                    $("#btn_seguir"+id_usuario_seguido).show();
+
+                                    $.ajax({
+                                        url: "deixar_seguir.php",
+                                        method: "POST",
+                                        data: {deixar_seguir_id_usuario: id_usuario_seguido},
+                                        success: function (data){
+                                            alert("Registro DES-seguido com sucesso");
+                                            // alert(data);
+                                        }
+                                    });
+
+                                });
                             }
                         });
 
@@ -53,20 +90,18 @@
 
                 });
 
-                function atualizaTweet (){
-                    $.ajax({
-                        url: "get_tweet.php",
+                // $("#autoCompInput").bind("keypress", {}, keypressInBox);
 
-                        success: function(data){
-                            $("#tweets").html(data);
-                            // alert(data);
-                        }
-                    });
+                // function keypressInBox(e) {
+                //     var code = (e.keyCode ? e.keyCode : e.which);
+                //     if (code == 13) { //Enter keycode                        
+                //         e.preventDefault();
 
-                    
-                }
+                //         $("#form_procurar_pessoa").submit();
+                //     }
+                // };
 
-                atualizaTweet();
+                
 
             });
         </script>
@@ -90,6 +125,7 @@
 	        
 	        <div id="navbar" class="navbar-collapse collapse">
 	          <ul class="nav navbar-nav navbar-right">
+                <li><a href="home.php">Home</a></li>
 	            <li><a href="exit.php">Exit</a></li>
 	          </ul>
 	        </div><!--/.nav-collapse -->
@@ -119,22 +155,22 @@
                 </div>
             </div>
 
-            <!--Coluna do meio, dos Tweets-->
+            <!--Coluna do meio, de procurar pessoas-->
 	    	<div class="col-md-6">
                 <div class="panel panel-default">
                     <div class="panel-body">
 
-                        <form class="input-group" id="form_tweet">
-                            <input type="text" placeholder="What's happening now..?" maxlength="140" class="form-control" id="texto_tweet" name="texto_tweet">
+                        <form class="input-group" id="form_procurar_pessoa">
+                            <input type="text" placeholder="Who are you looking for..?" class="form-control" id="nome_pessoa" name="nome_pessoa" action="" method="">
 
                             <span class="input-group-btn">
-                            <button type="submit" id="btn_tweet" class="btn btn-default">Tweet</button></span>
+                            <button type="button" id="btn_procurar_pessoa" class="btn btn-default">Search</button></span>
                             
                         </form>
                     </div>
                 </div>
 
-                <div class="list-groups" id="tweets">
+                <div class="list-groups" id="pessoas">
                     
                 </div>
 
@@ -144,14 +180,13 @@
 
                 <div class="panel panel-default text-center">
                     <div class="panel-body">
-                        <h4><a href="procurar_pessoas.php">Look for other users</a></h4>
+                        
                     </div>
                 </div>
             
             </div>
 
 		</div>
-
 
 	    </div>
 	

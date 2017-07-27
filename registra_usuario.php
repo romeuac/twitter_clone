@@ -17,19 +17,15 @@
  
     $dados_usuarios = array();
 
-    // $usr_existe = false;
-    // $email_existe = false;
-    // var_dump($retorno); 
+
     $retorno_get = "";
 
     while ($linha = mysqli_fetch_array ($retorno, MYSQLI_ASSOC) and !empty($retorno)){
         $dados_usuarios[] = $linha;
         if ($linha['email']==$email){
-            // $email_existe = true;
             $retorno_get = $retorno_get."erro_email=1&";
         }
         if ($linha['usuario']==$usuario){
-            // $usr_existe = true;
             $retorno_get = $retorno_get."erro_usr=1&";
         }
     }

@@ -9,7 +9,7 @@
 
     require_once('db.class.php');
 
-    $texto_tweet = isset($_POST["texto_tweet"]) ? $_POST["texto_tweet"] : "";
+    // $texto_tweet = isset($_POST["texto_tweet"]) ? $_POST["texto_tweet"] : "";
     $id_usuario = $_SESSION["id_usuario"];
 
 
